@@ -1,0 +1,100 @@
+{
+  "env": {
+    "BASH_MAX_TIMEOUT_MS": "900000",
+    "BASH_DEFAULT_TIMEOUT_MS": "600000"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npx @marp-team/marp-cli:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npm run build:*)",
+      "Bash(marp:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "WebFetch(domain:qiita.com)",
+      "WebFetch(domain:note.com)",
+      "Bash(curl:*)",
+      "Bash(grep:*)",
+      "Bash(git checkout:*)",
+      "Bash(cp:*)",
+      "Bash(ls:*)",
+      "mcp__ide__executeCode",
+      "Bash(python:*)",
+      "WebFetch(domain:www.designsystems.com)",
+      "Bash(pip install:*)",
+      "Bash(sed:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(open template_presentation.pptx)",
+      "Bash(mkdir:*)",
+      "Bash(chmod:*)"
+    ],
+    "deny": []
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/.claude/hooks/hook_stop_words.sh"
+          },
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
+          },
+          {
+            "type": "command",
+            "command": "terminal-notifier -message \"Claude Code の処理が完了しました\" -title \"Claude Code\" -subtitle \"All tasks finished\""
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/dynamic_voice_stop.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/.claude/hooks/hook_stop_words.sh"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Submarine.aiff"
+          },
+          {
+            "type": "command",
+            "command": "terminal-notifier -message \"Claudeが確認を求めています\" -title \"Claude Code\" -subtitle \"Confirmation required\""
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/voice_notification.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/.claude/hooks/hook_pre_commands.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
